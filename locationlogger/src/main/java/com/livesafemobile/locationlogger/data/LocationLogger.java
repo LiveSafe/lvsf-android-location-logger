@@ -117,13 +117,24 @@ public final class LocationLogger {
         //create a file to send
         File root = Environment.getExternalStorageDirectory();
         File file = new File(root, "logs.json");
+
+        if (file.exists()){
+            file.delete();
+        }
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            Log.d(TAG, "fail creating file");
+            e.printStackTrace();
+        }
+
         if (!file.exists() || !file.canRead()) {
             Log.e(TAG, "file doesn\'t exist or can\'t be read");
             return null;
         }
 
         try {
-            FileUtils.writeStringToFile(file, getLogsAsString(), null);
+            FileUtils.writeStringToFile(file, getLogsAsString(), (String) null);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
