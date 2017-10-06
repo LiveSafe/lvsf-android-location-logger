@@ -1,0 +1,1 @@
+# lvsf-android-location-logger
