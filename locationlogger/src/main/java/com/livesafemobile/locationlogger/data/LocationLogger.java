@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.livesafemobile.locationlogger.R;
+import com.livesafemobile.locationlogger.ui.LocationLoggerListActivity;
 
 import org.apache.commons.io.FileUtils;
 
@@ -65,14 +66,8 @@ public final class LocationLogger {
     }
 
     public void displayLogs() {
-        Intent intent = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.setType("text/plain");
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            // Only the system receives the ACTION_OPEN_DOCUMENT, so no need to test.
-            context.startActivity(intent);
-        }
+        Intent intent = new Intent(context, LocationLoggerListActivity.class);
+        context.startActivity(intent);
     }
 
     /**
