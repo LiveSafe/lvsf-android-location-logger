@@ -1,1 +1,1 @@
-include ':app', ':locationlogger'
+include ':locationlogger', ':sample'

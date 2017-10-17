@@ -1,4 +1,4 @@
-package com.livesafemobile.locationlogger
+package com.livesafemobile.sample
 
 import org.junit.Test
 

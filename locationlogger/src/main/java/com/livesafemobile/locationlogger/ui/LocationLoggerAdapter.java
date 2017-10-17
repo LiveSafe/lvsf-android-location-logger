@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.livesafemobile.locationlogger.R;
 import com.livesafemobile.locationlogger.data.LocationLogger;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +22,7 @@ import java.util.List;
 
 public class LocationLoggerAdapter extends RecyclerView.Adapter<LocationLoggerAdapter.ViewHolder> {
 
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     Context context;
     List<Location> locationList = new ArrayList<>();
     public LocationLoggerAdapter(Context context) {
@@ -32,13 +36,13 @@ public class LocationLoggerAdapter extends RecyclerView.Adapter<LocationLoggerAd
 
         public ViewHolder(View view) {
             super(view);
-            view.findViewById(android.R.id.text1);
+            textView = view.findViewById(R.id.tvText);
         }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(android.R.layout.activity_list_item, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.location_list_item, viewGroup, false);
 
         return new ViewHolder(v);
     }
@@ -46,7 +50,7 @@ public class LocationLoggerAdapter extends RecyclerView.Adapter<LocationLoggerAd
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         Location location = locationList.get(position);
-        viewHolder.textView.setText(location.toString());
+        viewHolder.textView.setText(printLocation(location));
     }
 
     @Override
@@ -58,4 +62,21 @@ public class LocationLoggerAdapter extends RecyclerView.Adapter<LocationLoggerAd
         return locationList.size();
     }
 
+    private String printLocation(Location location){
+
+        return "Location[Provider=" + location.getProvider() + "\n" +
+                            ",Time=" + sdf.format(new Date(location.getTime())) +"\n" +
+                            ",Latitude=" + location.getLatitude() +"\n" +
+                            ",Longitude=" + location.getLongitude() +"\n" +
+                            ",HasAltitude=" + location.hasAltitude() +"\n" +
+                            ",Altitude=" + location.getAltitude() +"\n" +
+                            ",HasSpeed=" + location.hasSpeed() +"\n" +
+                            ",Speed=" + location.getSpeed() +"\n" +
+                            ",HasBearing=" + location.hasBearing() +"\n" +
+                            ",Bearing=" + location.getBearing() +"\n" +
+                            ",HasAccuracy=" + location.hasAccuracy() +"\n" +
+                           ",Accuracy=" + location.getAccuracy() +
+                          "]";
+
+    }
 }

@@ -1,4 +1,4 @@
-package com.livesafemobile.locationlogger
+package com.livesafemobile.sample
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.livesafemobile.locationlogger", appContext.packageName)
+        assertEquals("com.livesafemobile.sample", appContext.packageName)
     }
 }
