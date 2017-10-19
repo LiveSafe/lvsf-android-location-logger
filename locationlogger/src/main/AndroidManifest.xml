@@ -11,5 +11,8 @@
         <activity
             android:name=".ui.LocationLoggerListActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.LocationLoggerMapActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

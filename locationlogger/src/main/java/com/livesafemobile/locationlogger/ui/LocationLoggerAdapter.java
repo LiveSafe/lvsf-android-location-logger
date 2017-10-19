@@ -22,7 +22,6 @@ import java.util.List;
 
 public class LocationLoggerAdapter extends RecyclerView.Adapter<LocationLoggerAdapter.ViewHolder> {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     Context context;
     List<Location> locationList = new ArrayList<>();
     public LocationLoggerAdapter(Context context) {
@@ -50,7 +49,7 @@ public class LocationLoggerAdapter extends RecyclerView.Adapter<LocationLoggerAd
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         Location location = locationList.get(position);
-        viewHolder.textView.setText(printLocation(location));
+        viewHolder.textView.setText(LocationPrinter.printLocation(location));
     }
 
     @Override
@@ -60,23 +59,5 @@ public class LocationLoggerAdapter extends RecyclerView.Adapter<LocationLoggerAd
 
     @Override public int getItemCount() {
         return locationList.size();
-    }
-
-    private String printLocation(Location location){
-
-        return "Location[Provider=" + location.getProvider() + "\n" +
-                            ",Time=" + sdf.format(new Date(location.getTime())) +"\n" +
-                            ",Latitude=" + location.getLatitude() +"\n" +
-                            ",Longitude=" + location.getLongitude() +"\n" +
-                            ",HasAltitude=" + location.hasAltitude() +"\n" +
-                            ",Altitude=" + location.getAltitude() +"\n" +
-                            ",HasSpeed=" + location.hasSpeed() +"\n" +
-                            ",Speed=" + location.getSpeed() +"\n" +
-                            ",HasBearing=" + location.hasBearing() +"\n" +
-                            ",Bearing=" + location.getBearing() +"\n" +
-                            ",HasAccuracy=" + location.hasAccuracy() +"\n" +
-                           ",Accuracy=" + location.getAccuracy() +
-                          "]";
-
     }
 }

@@ -1,6 +1,7 @@
 package com.livesafemobile.sample
 
 import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.livesafemobile.locationlogger.data.LocationLogger
 import com.livesafemobile.locationlogger.ui.LocationLoggerListActivity
+import com.livesafemobile.locationlogger.ui.LocationLoggerMapActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,7 +20,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val location1 = Location("gps")
+
+        LocationLogger.getInstance(this).clearLogs()
+
+        val location1 = Location(LocationManager.GPS_PROVIDER)
         location1.latitude = 38.895708
         location1.longitude = -77.075313
         location1.accuracy = 1f
@@ -26,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         location1.speed = 1f
         location1.time = System.currentTimeMillis()
 
-        val location2 = Location("gps")
-        location2.latitude = 38.895708
-        location2.longitude = -77.075313
+        val location2 = Location(LocationManager.NETWORK_PROVIDER)
+        location2.latitude = 0.0
+        location2.longitude = 0.0
         location2.accuracy = 1f
         location2.altitude = 1.0
         location2.speed = 2f
@@ -43,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        val intent = LocationLoggerListActivity.createIntent(this)
+        val intent = LocationLoggerMapActivity.createIntent(this)
         startActivity(intent)
     }
 

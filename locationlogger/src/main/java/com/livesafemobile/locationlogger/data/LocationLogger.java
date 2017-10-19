@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.livesafemobile.locationlogger.R;
 import com.livesafemobile.locationlogger.ui.LocationLoggerListActivity;
+import com.livesafemobile.locationlogger.ui.LocationLoggerMapActivity;
 
 import org.apache.commons.io.FileUtils;
 
@@ -67,6 +68,11 @@ public final class LocationLogger {
 
     public void displayLogs() {
         Intent intent = new Intent(context, LocationLoggerListActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void mapLogs() {
+        Intent intent = new Intent(context, LocationLoggerMapActivity.class);
         context.startActivity(intent);
     }
 
