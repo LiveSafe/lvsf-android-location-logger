@@ -82,7 +82,7 @@ public class LocationLoggerMapActivity extends AppCompatActivity implements
             case LocationManager.GPS_PROVIDER:
                 return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
             case LocationManager.NETWORK_PROVIDER:
-                return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+                return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);
             case LocationManager.PASSIVE_PROVIDER:
                 return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
             default:
