@@ -44,12 +44,11 @@ class MainActivity : AppCompatActivity() {
 
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            LocationLogger.getInstance(this).sendLogs()
         }
 
-        val intent = LocationLoggerMapActivity.createIntent(this)
-        startActivity(intent)
+//        val intent = LocationLoggerMapActivity.createIntent(this)
+//        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

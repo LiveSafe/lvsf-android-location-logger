@@ -14,5 +14,15 @@
         <activity
             android:name=".ui.LocationLoggerMapActivity"
             android:screenOrientation="portrait" />
+
+        <provider
+            android:name="com.livesafemobile.locationlogger.data.LogFileProvider"
+            android:authorities="${applicationId}.com.livesafemobile.locationlogger.data.provider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 </manifest>

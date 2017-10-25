@@ -26,6 +26,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 
+import static android.support.v4.content.FileProvider.getUriForFile;
+
 /**
  * Created by jshelly on 10/6/17.
  */
@@ -101,7 +103,8 @@ public final class LocationLogger {
         if (file == null) {
             return;
         }
-        Uri uri = Uri.fromFile(file);
+
+        Uri uri = getUriForFile(context, String.format("%s.com.livesafemobile.locationlogger.data.provider", context.getPackageName()), file);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
         context.startActivity(intent);
     }
@@ -119,7 +122,7 @@ public final class LocationLogger {
         File root = Environment.getExternalStorageDirectory();
         File file = new File(root, "logs.json");
 
-        if (file.exists()){
+        if (file.exists()) {
             file.delete();
         }
         try {
