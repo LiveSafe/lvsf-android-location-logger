@@ -8,19 +8,25 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.livesafemobile.locationlogger.R;
 import com.livesafemobile.locationlogger.data.LocationLogger;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -43,9 +49,9 @@ public class LocationLoggerMapActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logger_map);
 
-         mapFragment =
+        mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-         mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -65,6 +71,11 @@ public class LocationLoggerMapActivity extends AppCompatActivity implements
         googleMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
 
         List<Location> locations = LocationLogger.getInstance(this).getLogs();
+
+        if (locations == null || locations.isEmpty()){
+            return;
+        }
+
         for (Location location :
                 locations) {
             googleMap.addMarker(
@@ -75,6 +86,24 @@ public class LocationLoggerMapActivity extends AppCompatActivity implements
                             .icon(getIcon(location))
             );
         }
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+
+        Iterator<Location> markerIterator = locations.iterator();
+        Location loc;
+        while (markerIterator.hasNext()) {
+            loc = markerIterator.next();
+            builder.include(new LatLng(loc.getLatitude(), loc.getLongitude()));
+        }
+
+        LatLngBounds bounds = builder.build();
+
+        int padding = 200; // offset from edges of the map in pixels
+
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, mapFragment.getView()
+                .getWidth(), mapFragment.getView().getHeight(), padding);
+        googleMap.animateCamera(cu);
     }
 
     private BitmapDescriptor getIcon(Location location) {
@@ -95,7 +124,7 @@ public class LocationLoggerMapActivity extends AppCompatActivity implements
 
         private final View myContentsView;
 
-        MyInfoWindowAdapter(){
+        MyInfoWindowAdapter() {
             myContentsView = getLayoutInflater().inflate(R.layout.location_list_item, null);
         }
 
