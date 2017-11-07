@@ -1,6 +1,7 @@
 package com.livesafemobile.locationlogger.ui;
 
 import android.location.Location;
+import android.os.Bundle;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,20 +13,25 @@ import java.util.Date;
 public class LocationPrinter {
     static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
-    static String printLocation(Location location){
+    static String printLocation(Location location) {
+        Bundle b = location.getExtras();
+        String from = "";
+        if (location.getExtras() != null) {
+            from = b.getString("from");
+        }
 
         return "Provider=" + location.getProvider() + "\n" +
-                "Time=" + sdf.format(new Date(location.getTime())) +"\n" +
-                "Latitude=" + location.getLatitude() +"\n" +
-                "Longitude=" + location.getLongitude() +"\n" +
-                "HasAltitude=" + location.hasAltitude() +"\n" +
-                "Altitude=" + location.getAltitude() +"\n" +
-                "HasSpeed=" + location.hasSpeed() +"\n" +
-                "Speed=" + location.getSpeed() +"\n" +
-                "HasBearing=" + location.hasBearing() +"\n" +
-                "Bearing=" + location.getBearing() +"\n" +
-                "HasAccuracy=" + location.hasAccuracy() +"\n" +
-                "Accuracy=" + location.getAccuracy() ;
+                "Time=" + sdf.format(new Date(location.getTime())) + "\n" +
+                "Latitude=" + location.getLatitude() + "\n" +
+                "Longitude=" + location.getLongitude() + "\n" +
+                "HasAltitude=" + location.hasAltitude() + "\n" +
+                "Altitude=" + location.getAltitude() + "\n" +
+                "HasSpeed=" + location.hasSpeed() + "\n" +
+                "Speed=" + location.getSpeed() + "\n" +
+                "HasBearing=" + location.hasBearing() + "\n" +
+                "Bearing=" + location.getBearing() + "\n" +
+                "HasAccuracy=" + location.hasAccuracy() + "\n" +
+                "Accuracy=" + location.getAccuracy() + "\n" +from;
 
     }
 }

@@ -76,8 +76,7 @@ public class LocationLoggerMapActivity extends AppCompatActivity implements
             return;
         }
 
-        for (Location location :
-                locations) {
+        for (Location location : locations) {
             googleMap.addMarker(
                     new MarkerOptions()
                             .position(new LatLng(location.getLatitude(), location.getLongitude()))
