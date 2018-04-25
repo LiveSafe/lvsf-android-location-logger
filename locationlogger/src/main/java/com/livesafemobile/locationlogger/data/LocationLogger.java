@@ -70,11 +70,13 @@ public final class LocationLogger {
 
     public void displayLogs() {
         Intent intent = new Intent(context, LocationLoggerListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
     public void mapLogs() {
         Intent intent = new Intent(context, LocationLoggerMapActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
